@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BookFlow: Technical Coding Challenge</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    @page {
+      size: A4;
+      margin: 20mm 15mm 20mm 15mm;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Header styling */
+    .header {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+
+    .company-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #0284c7;
+      margin-bottom: 5px;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0 0 10px 0;
+      letter-spacing: -0.025em;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #64748b;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 8px;
+    }
+
+    p, li {
+      font-size: 0.95rem;
+      color: #334155;
+    }
+
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    /* Code blocks */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.85em;
+      background-color: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #0f172a;
+    }
+
+    /* Callout Box */
+    .callout {
+      background-color: #f0f9ff;
+      border-left: 4px solid #0284c7;
+      padding: 15px 20px;
+      border-radius: 0 6px 6px 0;
+      margin: 25px 0;
+    }
+
+    .callout-title {
+      font-weight: 600;
+      color: #0369a1;
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #0c4a6e;
+    }
+
+    /* Bonus Box */
+    .bonus-box {
+      background-color: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      padding: 15px 20px;
+      border-radius: 0 6px 6px 0;
+      margin: 25px 0;
+    }
+
+    .bonus-title {
+      font-weight: 600;
+      color: #15803d;
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+    }
+
+    .bonus-box p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #14532d;
+    }
+
+    /* Footer elements */
+    .footer {
+      margin-top: 50px;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 15px;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <div class="company-tag">Technical Assessment</div>
+      <h1>BookFlow: Library Loan Manager</h1>
+      <div class="subtitle">Programming Exercise for Engineering Candidates</div>
+    </div>
+
+    <h2>1. Overview & Goal</h2>
+    <p>
+      Welcome to our technical assessment! In this exercise, you will design and build a small core application called <strong>BookFlow</strong>. BookFlow is a lightweight library loan management service where <strong>Members</strong> can check out and return books, as well as rate their reading experiences.
+    </p>
+    <p>
+      This exercise has been designed to see how you design and build software. Rather than giving you strict, step-by-step specifications, we have deliberately left the implementation details open. This allows you to showcase your engineering instincts and trade-off selections. You should be ready to discuss any part of your solution during the interview.
+    </p>
+
+    <div class="callout">
+      <div class="callout-title">Completion Target</div>
+      <p>This exercise is designed to take between <strong>2 to 4 hours</strong>. Focus on delivering readable code that covers the core business requirements, rather than implementing extensive auxiliary features. Hacks and suboptimal solutions are ok, but be prepared to discuss them and how they could be improved given more time.</p>
+    </div>
+
+    <h2>2. The Tech Stack</h2>
+    <p>
+      Your submission must utilize the following stack:
+    </p>
+    <ul>
+      <li><strong>Backend Language & Framework:</strong> Java 17+ built on <strong>Spring Boot 3.x</strong>.</li>
+      <li><strong>Web Layer:</strong> <strong>Spring WebFlux</strong>.</li>
+      <li><strong>Database:</strong> Use an in-memory <strong>H2 Database</strong></li>
+      <li><strong>Frontend (Optional):</strong> A clean, functional dashboard written in <strong>Angular (v15+)</strong>.</li>
+    </ul>
+
+    <h2>3. Database Design</h2>
+    <p>
+      Your application must manage and store persistent state. The system is required to track the following information, but the exact table structures, relationship mapping, and database normalization choices are <strong>completely up to you</strong>:
+    </p>
+    <ul>
+      <li><strong>Books:</strong> Basic descriptive data for library catalogs (titles, authors, unique identifiers like ISBNs, quantities, etc.).</li>
+      <li><strong>Members:</strong> Details about library patrons.</li>
+      <li><strong>Loans:</strong> Records indicating which member has borrowed which book, when it was checked out, and whether/when it was returned.</li>
+      <li><strong>Book Ratings:</strong> Reviews and numerical scores submitted by members for books they have read.</li>
+    </ul>
+    <p>
+      Please configure the database to spin up and seed automatically with representative dummy data (e.g., via <code>schema.sql</code> and <code>data.sql</code> or programmatic initialization on startup) so your application is immediately ready to run and test.
+    </p>
+
+    <h2>4. API Design</h2>
+    <p>
+      Design and implement a clean, expressive, and robust API. The endpoints, HTTP verbs, payload formats, and URI naming conventions are yours to decide. Your API must cover the following core business requirements:
+    </p>
+    <ol>
+      <li><strong>Loan a Book:</strong> A member should be able to request a loan for a specific book.</li>
+      <li><strong>Return a Book:</strong> A member should be able to return a book, updating the status of the loan and replenishing the library's physical inventory.</li>
+      <li><strong>Rate a Book:</strong> A member should be able to submit a rating (and optional short feedback) for a book.</li>
+    </ol>
+    <p>
+      Feel free to structure your code as you see fit, but do include at least one unit test and one integration test.
+    </p>
+    
+    <h3>Authentication and Security</h3>
+    <p>
+      For the base requirements, you do not need to implement complex security layers. You are permitted to pass a member identifier (e.g., <code>memberId</code>) as an HTTP header, query parameter, or within the request body to simulate the current active user. It is sufficient to leave a small comment in the code how you would optimize this given more time.
+    </p>
+
+    <h2>5. Frontend Task (Optional Angular Dashboard)</h2>
+    <p>
+      To provide a complete user experience, you are encouraged to build a lightweight, single-page Angular dashboard. This interface should allow a library member to see a consolidated view of their account.
+    </p>
+    <p>
+      The mini-dashboard should support:
+    </p>
+    <ul>
+      <li><strong>Current Loans:</strong> Display a list of the books currently borrowed by the active user.</li>
+      <li><strong>Ratings Dashboard:</strong> Show a view of these books along with rating statistics:
+        <ul>
+          <li>The active member's own rating for that book (if they have rated it).</li>
+          <li>The consolidated aggregate rating of the book calculated from all members in the system.</li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      Keep the user interface clean and intuitive. You do not need complex CSS packages; a well-structured layout using vanilla CSS (Flexbox or CSS Grid) is perfect.
+    </p>
+  </div>
+
+</body>
+</html>

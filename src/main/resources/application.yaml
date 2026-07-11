@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Case
+  r2dbc:
+    url: r2dbc:h2:mem:///bookflow;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+  sql:
+    init:
+      mode: always
+      continue-on-error: false
