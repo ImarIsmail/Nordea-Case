@@ -1,0 +1,75 @@
+<main class="page">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">BookFlow dashboard</p>
+          <h1>Current loans and rating snapshot</h1>
+          <p class="subtitle">
+            Enter a member ID, refresh, and see the active loans plus the rating summary for each book.
+          </p>
+        </div>
+
+        <div class="member-box">
+          <label for="memberId">Active member ID</label>
+          <div class="member-row">
+            <input id="memberId" type="number" min="1" [formControl]="memberIdControl" />
+            <button type="button" (click)="loadDashboard()" [disabled]="loading">{{ loading ? 'Loading...' : 'Refresh' }}</button>
+          </div>
+          <p class="hint">Try member 1 or 2 with the seeded data.</p>
+        </div>
+      </section>
+
+      <section class="stats" *ngIf="!loading && !error">
+        <article>
+          <span>Active loans</span>
+          <strong>{{ items.length }}</strong>
+        </article>
+      </section>
+
+      <section class="panel" *ngIf="error">
+        <h2>Something went wrong</h2>
+        <p>{{ error }}</p>
+      </section>
+
+      <section class="panel" *ngIf="!loading && !error && items.length === 0">
+        <h2>No active loans</h2>
+        <p>This member currently has no open loans.</p>
+      </section>
+
+      <section class="grid" *ngIf="items.length > 0">
+        <article class="card" *ngFor="let item of items; trackBy: trackByLoan">
+          <div class="card-top">
+            <div>
+              <p class="card-label">Loan #{{ item.loan.loanId }}</p>
+              <h2>{{ item.loan.bookTitle }}</h2>
+            </div>
+            <span class="status">{{ item.loan.status }}</span>
+          </div>
+
+          <div class="meta">
+            <div>
+              <span>Checked out</span>
+              <strong>{{ item.loan.checkedOutAt | date : 'mediumDate' }}</strong>
+            </div>
+            <div>
+              <span>Available copies</span>
+              <strong>{{ item.loan.availableCopies }}</strong>
+            </div>
+          </div>
+
+          <div class="ratings">
+            <div>
+              <span>Your rating</span>
+              <strong>{{ item.summary.memberScore ?? 'Not rated' }}</strong>
+            </div>
+            <div>
+              <span>Aggregate score</span>
+              <strong>{{ item.summary.averageScore | number : '1.1-1' }}</strong>
+            </div>
+            <div>
+              <span>Total ratings</span>
+              <strong>{{ item.summary.ratingCount }}</strong>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>

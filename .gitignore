@@ -4,6 +4,9 @@ target/
 *.log
 *.mv.db
 *.trace.db
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
