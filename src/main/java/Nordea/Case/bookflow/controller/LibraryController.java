@@ -24,6 +24,11 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/api")
 // Thin WebFlux controller that exposes the API endpoints and forwards requests to the service layer.
+	// SECURITY NOTE: memberId is accepted directly from the client to simulate the active user, per
+	// case requirements. In a potential production environment, clients would authenticate (e.g. email magic-link or OAuth2/OIDC)
+	// and receive a JWT/session token validated per-request via Spring Security's WebFlux filter chain.
+	// memberId would then be derived from the verified token instead, making checks like
+	// returnBook's ownership comparison a real authorization guard instead of a client-controlled one.
 public class LibraryController {
 
 	private final LibraryService libraryService;
@@ -34,9 +39,8 @@ public class LibraryController {
 
 	@PostMapping("/loans")
 	public Mono<ResponseEntity<LoanResponse>> loanBook(@Valid @RequestBody LoanRequest request) {
-		// In a real application the member id would come from the authenticated principal instead of the request body/HTTP headers.
-		return libraryService.loanBook(request).map(response -> ResponseEntity.status(HttpStatus.CREATED).body(response));
-	}
+    return libraryService.loanBook(request).map(response -> ResponseEntity.status(HttpStatus.CREATED).body(response));
+}
 
 	@PostMapping("/loans/{loanId}/return")
 	public Mono<ResponseEntity<LoanResponse>> returnBook(@PathVariable Long loanId,
